@@ -68,8 +68,6 @@ def filterSpreadsheet(data):
                 if df.empty:
                     return df
 
-        print(df)
-
         return df
 
     def get_optimal_chunksize(file_path, memory_limit):
@@ -87,11 +85,8 @@ def filterSpreadsheet(data):
     if arquivos_planilha == []:
         return []
 
-    print(len(arquivos_planilha))
     dfs = []
     for arquivo in arquivos_planilha:
-        print('LOADING CSV: ', arquivo)
-
         df = pd.read_csv(arquivo, delimiter=';',
                          chunksize=get_optimal_chunksize(arquivo, 100000000))
         with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
