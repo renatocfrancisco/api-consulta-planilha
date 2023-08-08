@@ -1,6 +1,7 @@
 # script-consulta-maciça
 
 Usando um json como filtro, `main.py` retorna um csv com os dados filtrados.
+
 Precisa-se da pasta de planilhas e do arquivo `data.json` para testar.
 
 ## Colunas para filtrar
@@ -20,6 +21,7 @@ Exemplo:
 
 ```json
 {
+  "uf": ["SP","TO"],
   "idade": {
     "min": 80,
     "max": 80
@@ -36,5 +38,4 @@ Exemplo:
   "banco_emp": [1, 2],
   "banco_pgto": [104,237]
 }
-
 ```
