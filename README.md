@@ -8,12 +8,11 @@ Precisa-se da pasta de planilhas e do arquivo `data.json` para testar.
 
 - Idade - `idade`
 - Valor de parcela - `parcela`
-- Qnt parcela paga - `soma parcela`
+- Quantidade de parcela paga - `soma parcela`
 - Espécie Benefício - `esp`
-- UF - `?`
-- Banco Empréstimo - `banco emp`
+- Banco de Empréstimo - `banco emp`
 - Banco de Pagamento - `banco PGTO`
-- Taxa juros - `juros`
+- Taxa de juros - `juros`
 
 ## data.json
 
@@ -33,6 +32,10 @@ Exemplo:
   "soma_parcela": {
     "min": 70,
     "max": 500
+  },
+  "juros":{
+    "min": 1,
+    "max": 2
   },
   "esp": [21, 41],
   "banco_emp": [1, 2],

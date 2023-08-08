@@ -19,7 +19,7 @@ def post_data():
     if not data:
         return (jsonify({'message': 'No data received'}), status.HTTP_400_BAD_REQUEST)
 
-    if not all(key in data for key in ('uf', 'idade', 'parcela', 'soma_parcela', 'esp', 'banco_emp', 'banco_pgto')):
+    if not all(key in data for key in ('uf', 'idade', 'parcela', 'soma_parcela', 'esp', 'banco_emp', 'banco_pgto', 'juros')):
         return (jsonify({'message': 'Data has missing keys'}), status.HTTP_400_BAD_REQUEST)
 
     result = filterSpreadsheet(data)
