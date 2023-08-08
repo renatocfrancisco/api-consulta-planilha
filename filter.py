@@ -112,6 +112,7 @@ def filterSpreadsheet(data):
     if arquivos_planilha == []:
         return []
 
+    print(len(arquivos_planilha))
     dfs = []
     for arquivo in arquivos_planilha:
         print('LOADING CSV: ', arquivo)
@@ -129,8 +130,8 @@ def filterSpreadsheet(data):
 
             executor.shutdown(wait=True)
 
-        dados_combinados = pd.concat(dfs, ignore_index=True)
-        dados_combinados.to_csv('planilha_combinada.csv', index=False)
-        returnData = dados_combinados.to_dict(orient='records')
+    dados_combinados = pd.concat(dfs, ignore_index=True)
+    dados_combinados.to_csv('planilha_combinada.csv', index=False)
+    returnData = dados_combinados.to_dict(orient='records')
 
-        return returnData
+    return returnData
