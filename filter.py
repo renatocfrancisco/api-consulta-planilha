@@ -4,6 +4,7 @@ import concurrent.futures
 
 from constants.brazilian_states import brazilian_states
 
+
 def filterSpreadsheet(data):
     def filtrarDataframe(data, df):
         def idade(df, desde, ate):
@@ -46,52 +47,26 @@ def filterSpreadsheet(data):
             df = df[df['banco PGTO'].isin(arrayBancos)]
             return df
 
-        print('start filtering')
-
         df[['parcela', 'soma parcela', 'juros']] = df[['parcela', 'soma parcela',
                                                        'juros']].apply(lambda x: x.str.replace(',', '.').astype(float))
 
-        # line above for
-        # df['parcela'] = df['parcela'].str.replace(',', '.')
-        # df['parcela'] = df['parcela'].astype(float)
-        # df['soma parcela'] = df['soma parcela'].str.replace(',', '.')
-        # df['soma parcela'] = df['soma parcela'].astype(float)
-        # df['juros'] = df['juros'].str.replace(',', '.')
-        # df['juros'] = df['juros'].astype(float)
+        conditions = [
+            (data['idade']['min'] or data['idade']['max'], idade,
+             (data['idade']['min'], data['idade']['max'])),
+            (data['parcela']['min'] or data['parcela']['max'], parcela,
+             (data['parcela']['min'], data['parcela']['max'])),
+            (data['soma_parcela']['min'] or data['soma_parcela']['max'], soma_parcela,
+             (data['soma_parcela']['min'], data['soma_parcela']['max'])),
+            (data['esp'], esp, (data['esp'],)),
+            (data['banco_emp'], banco_emp, (data['banco_emp'],)),
+            (data['banco_pgto'], banco_pgto, (data['banco_pgto'],))
+        ]
 
-        if data['idade']['min'] or data['idade']['max']:
-            df = idade(df, data['idade']['min'], data['idade']['max'])
-
-        if df.empty:
-            return df
-
-        if data['parcela']['min'] or data['parcela']['max']:
-            df = parcela(df, data['parcela']['min'], data['parcela']['max'])
-
-        if df.empty:
-            return df
-
-        if data['soma_parcela']['min'] or data['soma_parcela']['max']:
-            df = soma_parcela(df, data['soma_parcela']['min'],
-                              data['soma_parcela']['max'])
-
-        if df.empty:
-            return df
-
-        if data['esp']:
-            df = esp(df, data['esp'])
-
-        if df.empty:
-            return df
-
-        if data['banco_emp']:
-            df = banco_emp(df, data['banco_emp'])
-
-        if df.empty:
-            return df
-
-        if data['banco_pgto']:
-            df = banco_pgto(df, data['banco_pgto'])
+        for condition, func, args in conditions:
+            if condition:
+                df = func(df, *args)
+                if df.empty:
+                    return df
 
         print(df)
 
@@ -99,10 +74,10 @@ def filterSpreadsheet(data):
 
     def get_optimal_chunksize(file_path, memory_limit):
         file_size = os.path.getsize(file_path)
-        buffer_size = 70000  # You can adjust this as needed - default: 100000
+        buffer_size = 70000  # default: 100000
         chunksize = (file_size / memory_limit) * buffer_size
         return int(chunksize)
-    
+
     arquivos_planilha = []
 
     for uf in data['uf']:
@@ -117,7 +92,6 @@ def filterSpreadsheet(data):
     for arquivo in arquivos_planilha:
         print('LOADING CSV: ', arquivo)
 
-        # Usamos o ponto e vírgula como delimitador
         df = pd.read_csv(arquivo, delimiter=';',
                          chunksize=get_optimal_chunksize(arquivo, 100000000))
         with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
@@ -132,6 +106,6 @@ def filterSpreadsheet(data):
 
     dados_combinados = pd.concat(dfs, ignore_index=True)
     dados_combinados.to_csv('planilha_combinada.csv', index=False)
-    returnData = dados_combinados.to_dict(orient='records')
+    returnData = dados_combinados.to_csv(index=False)
 
     return returnData
