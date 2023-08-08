@@ -2,8 +2,7 @@ import os
 import pandas as pd
 import concurrent.futures
 
-brazilian_states = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO']
-
+from constants.brazilian_states import brazilian_states
 
 def filterSpreadsheet(data):
     def filtrarDataframe(data, df):
@@ -108,7 +107,6 @@ def filterSpreadsheet(data):
 
     for uf in data['uf']:
         if uf in brazilian_states:
-            #arquivos_planilha.append(files[uf])
             arquivos_planilha.append('csv/' + uf + '.csv')
 
     if arquivos_planilha == []:
