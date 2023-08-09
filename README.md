@@ -1,6 +1,6 @@
 # script-consulta-maciça
 
-Usando um json como filtro, `main.py` retorna um csv com os dados filtrados.
+Usando um json como filtro, `filter.py` retorna um csv com os dados filtrados.
 
 Precisa-se da pasta de planilhas e do arquivo `data.json` para testar.
 
