@@ -21,22 +21,14 @@ Exemplo:
 ```json
 {
   "uf": ["SP","TO"],
-  "idade": {
-    "min": 80,
-    "max": 80
-  },
-  "parcela": {
-    "min": 50,
-    "max": 400
-  },
-  "soma_parcela": {
-    "min": 70,
-    "max": 500
-  },
-  "juros":{
-    "min": 1,
-    "max": 2
-  },
+  "idadeMin": 80,
+  "idadeMax": 80,
+  "parcelaMin": 50,
+  "parcelaMax": 400,
+  "parcelasPagasMin": 70,
+  "parcelasPagasMax": 500,
+  "jurosMin": 1,
+  "jurosMax": 2,
   "esp": [21, 41],
   "banco_emp": [1, 2],
   "banco_pgto": [104,237]
