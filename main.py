@@ -19,8 +19,18 @@ def post_data():
     if not data:
         return (jsonify({'message': 'No data received'}), status.HTTP_400_BAD_REQUEST)
 
-    if not all(key in data for key in ('uf', 'idade', 'parcela', 'soma_parcela', 'esp', 'banco_emp', 'banco_pgto', 'juros')):
+    for key in ('idadeMin', 'idadeMax', 'parcelaMin', 'parcelaMax', 'parcelasPagasMin', 'parcelasPagasMax', 'jurosMin', 'jurosMax'):
+        if key not in data:
+            data[key] = 0
+
+    if not all(key in data for key in ('uf', 'idadeMin', 'idadeMax', 'parcelaMin', 'parcelaMax', 'parcelasPagasMin', 'parcelasPagasMax', 'jurosMin', 'jurosMax', 'esp', 'banco_emp', 'banco_pgto')):
         return (jsonify({'message': 'Data has missing keys'}), status.HTTP_400_BAD_REQUEST)
+
+    if not all(isinstance(data[key], int) for key in ('idadeMin', 'idadeMax', 'parcelaMin', 'parcelaMax', 'parcelasPagasMin', 'parcelasPagasMax', 'jurosMin', 'jurosMax')):
+        return (jsonify({'message': 'Data has invalid values', 'data': data}), status.HTTP_400_BAD_REQUEST)
+
+    if not all(isinstance(data[key], list) for key in ('uf', 'esp', 'banco_emp', 'banco_pgto')):
+        return (jsonify({'message': 'Data has invalid values', 'data': data}), status.HTTP_400_BAD_REQUEST)
 
     result = filterSpreadsheet(data)
 
