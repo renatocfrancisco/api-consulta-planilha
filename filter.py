@@ -35,6 +35,16 @@ def filterSpreadsheet(data):
                 df = df[df['soma parcela'] <= ate]
             return df
 
+        def juros(df, desde, ate):
+            if desde and ate:
+                df = df[(df['juros'] >= desde)
+                        & (df['juros'] <= ate)]
+            elif desde:
+                df = df[df['juros'] >= desde]
+            else:
+                df = df[df['juros'] <= ate]
+            return df
+
         def esp(df, arrayEsp):
             df = df[df['esp'].isin(arrayEsp)]
             return df
@@ -57,6 +67,8 @@ def filterSpreadsheet(data):
              (data['parcela']['min'], data['parcela']['max'])),
             (data['soma_parcela']['min'] or data['soma_parcela']['max'], soma_parcela,
              (data['soma_parcela']['min'], data['soma_parcela']['max'])),
+            (data['juros']['min'] or data['juros']['max'], juros,
+             (data['juros']['min'], data['juros']['max'])),
             (data['esp'], esp, (data['esp'],)),
             (data['banco_emp'], banco_emp, (data['banco_emp'],)),
             (data['banco_pgto'], banco_pgto, (data['banco_pgto'],))
