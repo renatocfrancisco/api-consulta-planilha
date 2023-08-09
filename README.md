@@ -1,8 +1,15 @@
 # script-consulta-maciça
 
-Usando um json como filtro, `filter.py` retorna um csv com os dados filtrados.
+![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
+![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=flat&logo=pandas&logoColor=white)
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=flat&logo=flask&logoColor=white)
 
-Precisa-se da pasta de planilhas e do arquivo `data.json` para testar.
+API Flask com requisição POST para retornar um `.csv`, filtrando e consultando planilhas.
+
+- Precisa-se da pasta de planilhas (no código, pasta: `csv`).
+- `py -m venv venv`, `.\venv\Scripts\activate` e `deactivate` para usar ambiente de desenvolvimento python
+- `pip install -r requirements.txt` para instalar dependências
+- `flask --app main run` para executar main.py com Flask
 
 ## Colunas para filtrar
 
@@ -14,7 +21,7 @@ Precisa-se da pasta de planilhas e do arquivo `data.json` para testar.
 - Banco de Pagamento - `banco PGTO`
 - Taxa de juros - `juros`
 
-## data.json
+## Body da requisição (json)
 
 Exemplo:
 
