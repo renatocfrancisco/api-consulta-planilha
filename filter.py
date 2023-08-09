@@ -12,7 +12,7 @@ def filterSpreadsheet(data):
                 df = df[(df['idade'] >= desde) & (df['idade'] <= ate)]
             elif desde:
                 df = df[df['idade'] >= desde]
-            else:
+            elif ate:
                 df = df[df['idade'] <= ate]
             return df
 
@@ -21,7 +21,7 @@ def filterSpreadsheet(data):
                 df = df[(df['parcela'] >= desde) & (df['parcela'] <= ate)]
             elif desde:
                 df = df[df['parcela'] >= desde]
-            else:
+            elif ate:
                 df = df[df['parcela'] <= ate]
             return df
 
@@ -31,7 +31,7 @@ def filterSpreadsheet(data):
                         & (df['soma parcela'] <= ate)]
             elif desde:
                 df = df[df['soma parcela'] >= desde]
-            else:
+            elif ate:
                 df = df[df['soma parcela'] <= ate]
             return df
 
@@ -41,7 +41,7 @@ def filterSpreadsheet(data):
                         & (df['juros'] <= ate)]
             elif desde:
                 df = df[df['juros'] >= desde]
-            else:
+            elif ate:
                 df = df[df['juros'] <= ate]
             return df
 
@@ -60,29 +60,29 @@ def filterSpreadsheet(data):
         df[['parcela', 'soma parcela', 'juros']] = df[['parcela', 'soma parcela',
                                                        'juros']].apply(lambda x: x.str.replace(',', '.').astype(float))
 
-        conditions = [
-            (data['idade']['min'] or data['idade']['max'], idade,
-             (data['idade']['min'], data['idade']['max'])),
-            (data['parcela']['min'] or data['parcela']['max'], parcela,
-             (data['parcela']['min'], data['parcela']['max'])),
-            (data['soma_parcela']['min'] or data['soma_parcela']['max'], soma_parcela,
-             (data['soma_parcela']['min'], data['soma_parcela']['max'])),
-            (data['juros']['min'] or data['juros']['max'], juros,
-             (data['juros']['min'], data['juros']['max'])),
-            (data['esp'], esp, (data['esp'],)),
-            (data['banco_emp'], banco_emp, (data['banco_emp'],)),
-            (data['banco_pgto'], banco_pgto, (data['banco_pgto'],))
-        ]
-
-        for condition, func, args in conditions:
-            if condition:
-                df = func(df, *args)
-                if df.empty:
-                    return df
+        df = idade(df, data['idadeMin'], data['idadeMax'])
+        if df.empty:
+            return df
+        df = parcela(df, data['parcelaMin'], data['parcelaMax'])
+        if df.empty:
+            return df
+        df = soma_parcela(df, data['parcelasPagasMin'], data['parcelasPagasMax'])
+        if df.empty:
+            return df
+        df = juros(df, data['jurosMin'], data['jurosMax'])
+        if df.empty:
+            return df
+        df = esp(df, data['esp'])
+        if df.empty:
+            return df
+        df = banco_emp(df, data['banco_emp'])
+        if df.empty:
+            return df
+        df = banco_pgto(df, data['banco_pgto'])
 
         return df
 
-    def get_optimal_chunksize(file_path, memory_limit):
+    def get_optimal_chunksize(file_path, memory_limit=100000000):
         file_size = os.path.getsize(file_path)
         buffer_size = 70000  # default: 100000
         chunksize = (file_size / memory_limit) * buffer_size
@@ -100,7 +100,7 @@ def filterSpreadsheet(data):
     dfs = []
     for arquivo in arquivos_planilha:
         df = pd.read_csv(arquivo, delimiter=';',
-                         chunksize=get_optimal_chunksize(arquivo, 100000000))
+                         chunksize=get_optimal_chunksize(arquivo))
         with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
             futures = []
 
