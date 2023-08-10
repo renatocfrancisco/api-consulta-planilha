@@ -3,6 +3,7 @@ import pandas as pd
 import concurrent.futures
 
 from constants.brazilian_states import brazilian_states
+from constants.columns_dtypes import columns_dtypes
 
 
 def filterSpreadsheet(data):
@@ -99,7 +100,10 @@ def filterSpreadsheet(data):
     dfs = []
     for arquivo in arquivos_planilha:
         df = pd.read_csv(
-            arquivo, delimiter=";", chunksize=get_optimal_chunksize(arquivo)
+            arquivo,
+            delimiter=";",
+            chunksize=get_optimal_chunksize(arquivo),
+            usecols=columns_dtypes,
         )
         with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
             futures = []
