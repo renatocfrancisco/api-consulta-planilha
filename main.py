@@ -91,6 +91,9 @@ def post_data():
             status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
 
+    if len(result.splitlines()) == 1:
+        return (jsonify({"message": "No data found"}), status.HTTP_404_NOT_FOUND)
+
     return (
         Response(
             result,
