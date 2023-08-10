@@ -1,4 +1,4 @@
-columns_dtypes = [
+columns = [
     "cpf",
     "nome",
     "dt-nasc",
