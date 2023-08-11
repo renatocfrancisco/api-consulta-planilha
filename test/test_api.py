@@ -38,6 +38,37 @@ def test_post_data_invalid_values(client):
     assert response.json.get("message") == "Data has invalid values"
 
 
+def test_post_data_missing_arrays(client):
+    data = {"uf": ["TO", "ES", "RO"], "esp": [], "banco_emp": [], "banco_pgto": []}
+    response = client.post("/", json=data)
+    assert response.status_code == 400
+    assert response.json.get("message") == "Missing arrays"
+
+
+def test_post_data_invalid_uf(client):
+    data = {
+        "uf": ["TO", "ES", 1],
+        "esp": [21, 41],
+        "banco_emp": [1, 2],
+        "banco_pgto": [104, 237],
+    }
+    response = client.post("/", json=data)
+    assert response.status_code == 400
+    assert response.json.get("message") == "UF array has invalid values"
+
+
+def test_post_data_invalid_arrays(client):
+    data = {
+        "uf": ["TO", "ES", "RO"],
+        "esp": [21, "41"],
+        "banco_emp": [1, "2"],
+        "banco_pgto": [104, "237"],
+    }
+    response = client.post("/", json=data)
+    assert response.status_code == 400
+    assert response.json.get("message") == "Data has invalid values"
+
+
 def test_post_data_not_received(client):
     data = {}
     response = client.post("/", json=data)
