@@ -54,6 +54,10 @@ def post_data():
             status.HTTP_400_BAD_REQUEST,
         )
 
+    for key in ("uf", "esp", "banco_emp", "banco_pgto"):
+        if key not in data or data[key] == []:
+            return jsonify({"message": "Missing arrays"}), status.HTTP_400_BAD_REQUEST
+
     if not all(
         isinstance(data[key], int)
         for key in (
@@ -72,13 +76,20 @@ def post_data():
             status.HTTP_400_BAD_REQUEST,
         )
 
-    if not all(
-        isinstance(data[key], list) for key in ("uf", "esp", "banco_emp", "banco_pgto")
-    ):
+    if not all(isinstance(uf, str) for uf in data["uf"]):
         return (
-            jsonify({"message": "Data has invalid values", "data": data}),
+            jsonify({"message": "UF array has invalid values", "data": data}),
             status.HTTP_400_BAD_REQUEST,
         )
+
+    for key in ("esp", "banco_emp", "banco_pgto"):
+        if not isinstance(data[key], list) or not all(
+            isinstance(uf, int) for uf in data[key]
+        ):
+            return (
+                jsonify({"message": "Data has invalid values", "data": data}),
+                status.HTTP_400_BAD_REQUEST,
+            )
 
     result = filterSpreadsheet(data)
 
