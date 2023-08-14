@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import concurrent.futures
+import psutil
 
 from constants.brazilian_states import brazilian_states
 from constants.columns import columns
@@ -82,9 +83,14 @@ def filterSpreadsheet(data):
 
         return df
 
-    def get_optimal_chunksize(file_path, memory_limit=100000000):
+    def get_optimal_chunksize(file_path):
+        try:
+            total_memory = psutil.virtual_memory().total
+            memory_limit = int(total_memory * 0.25)  # use 25% of total memory
+        except:
+            memory_limit = 100000000  # default to 100MB
         file_size = os.path.getsize(file_path)
-        buffer_size = 70000  # default: 100000
+        buffer_size = 100000  # default
         chunksize = (file_size / memory_limit) * buffer_size
         return int(chunksize)
 
