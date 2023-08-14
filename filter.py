@@ -123,7 +123,14 @@ def filterSpreadsheet(data):
             executor.shutdown(wait=True)
 
     dados_combinados = pd.concat(dfs, ignore_index=True)
-    dados_combinados.to_csv("planilha_combinada.csv", index=False)
-    returnData = dados_combinados.to_csv(index=False)
+
+    try:
+        dados_combinados.to_csv("planilha_combinada.csv", index=False)
+    except PermissionError:
+        print(
+            "O arquivo planilha_combinada.csv está aberto. Por favor, feche-o e tente novamente."
+        )
+    finally:
+        returnData = dados_combinados.to_csv(index=False)
 
     return returnData
