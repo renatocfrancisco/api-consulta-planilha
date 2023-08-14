@@ -84,10 +84,13 @@ def filterSpreadsheet(data):
         return df
 
     def get_optimal_chunksize(file_path):
-        total_memory = psutil.virtual_memory().total
-        memory_limit = int(total_memory * 0.25)  # use 25% of total memory
+        try:
+            total_memory = psutil.virtual_memory().total
+            memory_limit = int(total_memory * 0.25)  # use 25% of total memory
+        except:
+            memory_limit = 100000000  # default to 100MB
         file_size = os.path.getsize(file_path)
-        buffer_size = 100000 # default
+        buffer_size = 100000  # default
         chunksize = (file_size / memory_limit) * buffer_size
         return int(chunksize)
 
