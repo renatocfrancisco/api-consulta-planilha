@@ -7,10 +7,12 @@
 
 API Flask com requisição POST para retornar um `.csv`, filtrando e consultando planilhas.
 
+## Requisitos e comandos
+
 - Precisa-se da pasta de planilhas (no código, pasta: `csv`).
-- `py -m venv venv`, `.\venv\Scripts\activate` e `deactivate` para usar ambiente de desenvolvimento python
-- `pip install -r requirements.txt` para instalar dependências
-- `flask --app main run` para executar main.py com Flask
+- `py -m venv venv`, `.\venv\Scripts\activate` e `deactivate` para usar ambiente de desenvolvimento python.
+- `pip install -r requirements.txt` para instalar dependências.
+- `flask --app main run` para executar main.py com Flask.
 
 ## Colunas para filtrar
 
