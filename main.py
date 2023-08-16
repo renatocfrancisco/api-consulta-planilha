@@ -54,9 +54,14 @@ def post_data():
             status.HTTP_400_BAD_REQUEST,
         )
 
-    for key in ("uf", "esp", "banco_emp", "banco_pgto"):
-        if key not in data or data[key] == []:
-            return jsonify({"message": "Missing arrays"}), status.HTTP_400_BAD_REQUEST
+    if not all(
+        isinstance(uf, list)
+        for uf in (data["uf"], data["esp"], data["banco_emp"], data["banco_pgto"])
+    ):
+        return (
+            jsonify({"message": "Data has invalid values", "data": data}),
+            status.HTTP_400_BAD_REQUEST,
+        )
 
     if not all(
         isinstance(data[key], int)
