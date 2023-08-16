@@ -56,7 +56,7 @@ def filterSpreadsheet(data):
             return df
 
         def banco_pgto(df, arrayBancos):
-            if arrayBancos:            
+            if arrayBancos:
                 df = df[df["banco PGTO"].isin(arrayBancos)]
             return df
 
@@ -114,7 +114,7 @@ def filterSpreadsheet(data):
             chunksize=get_optimal_chunksize(arquivo),
             usecols=columns,
         )
-        print('Filtering file: ' + arquivo)
+        print("Filtering file: " + arquivo)
         with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
             futures = []
 
