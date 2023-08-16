@@ -9,10 +9,10 @@ API Flask com requisição POST para retornar um `.csv`, filtrando e consultando
 
 ## Requisitos e comandos
 
-- Precisa-se da pasta de planilhas (no código, pasta: `csv`).
-- `py -m venv venv`, `.\venv\Scripts\activate` e `deactivate` para usar ambiente de desenvolvimento python.
-- `pip install -r requirements.txt` para instalar dependências.
-- `flask --app main run` para executar main.py com Flask.
+- Precisa-se da pasta de planilhas (no código, pasta: `csv`), arquivos csv divididos em estados (ex: `SP.csv`)
+- `py -m venv venv`, `.\venv\Scripts\activate` e `deactivate` para usar ambiente de desenvolvimento python
+- `pip install -r requirements.txt` para instalar dependências
+- `flask --app main run` para executar main.py com Flask
 
 ## Colunas para filtrar
 
@@ -23,6 +23,12 @@ API Flask com requisição POST para retornar um `.csv`, filtrando e consultando
 - Banco de Empréstimo - `banco emp`
 - Banco de Pagamento - `banco PGTO`
 - Taxa de juros - `juros`
+
+### Colunas das planilhas do projeto:
+
+```csv
+cpf;nome;dt-nasc;esp;banco emp;nb;ctt;prazo;parcela;emprestado;inicio;fim;averbacao;ID_ORIGEM;cpf;cidade;uf;vl beneficio;dib;banco PGTO;meio_pgto;bairro;endereco;cep;agencia PGTO;FONE1;FONE2;FONE3;cpf;soma parcela;vl beneficio;margem;juros;idade
+```
 
 ## Body da requisição (json)
 
