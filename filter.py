@@ -46,15 +46,18 @@ def filterSpreadsheet(data):
             return df
 
         def esp(df, arrayEsp):
-            df = df[df["esp"].isin(arrayEsp)]
+            if arrayEsp:
+                df = df[df["esp"].isin(arrayEsp)]
             return df
 
         def banco_emp(df, arrayBancos):
-            df = df[df["banco emp"].isin(arrayBancos)]
+            if arrayBancos:
+                df = df[df["banco emp"].isin(arrayBancos)]
             return df
 
         def banco_pgto(df, arrayBancos):
-            df = df[df["banco PGTO"].isin(arrayBancos)]
+            if arrayBancos:            
+                df = df[df["banco PGTO"].isin(arrayBancos)]
             return df
 
         df[["parcela", "soma parcela", "juros"]] = df[
@@ -111,6 +114,7 @@ def filterSpreadsheet(data):
             chunksize=get_optimal_chunksize(arquivo),
             usecols=columns,
         )
+        print('Filtering file: ' + arquivo)
         with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
             futures = []
 
