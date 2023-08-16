@@ -129,8 +129,10 @@ def filterSpreadsheet(data):
         dados_combinados.to_csv("planilha_combinada.csv", index=False)
     except PermissionError:
         print(
-            "O arquivo planilha_combinada.csv está aberto. Por favor, feche-o e tente novamente."
+            "The file planilha_combinada.csv is open. Please close it and try again."
         )
+    except Exception as e:
+        print("Error in saving planilha_combinada.csv: ", e)
     finally:
         returnData = dados_combinados.to_csv(index=False)
 
