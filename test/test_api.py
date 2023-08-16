@@ -38,11 +38,10 @@ def test_post_data_invalid_values(client):
     assert response.json.get("message") == "Data has invalid values"
 
 
-def test_post_data_missing_arrays(client):
-    data = {"uf": ["TO", "ES", "RO"], "esp": [], "banco_emp": [], "banco_pgto": []}
+def test_post_data_empty_arrays_except_uf(client):
+    data = {"uf": ["RR"], "esp": [], "banco_emp": [], "banco_pgto": []}
     response = client.post("/", json=data)
-    assert response.status_code == 400
-    assert response.json.get("message") == "Missing arrays"
+    assert response.status_code != 400
 
 
 def test_post_data_invalid_uf(client):
