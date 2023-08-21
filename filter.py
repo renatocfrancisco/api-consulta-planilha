@@ -60,6 +60,10 @@ def filterSpreadsheet(data):
                 df = df[df["banco PGTO"].isin(arrayBancos)]
             return df
 
+        df["parcela"] = df["parcela"].astype(str)
+        df["soma parcela"] = df["soma parcela"].astype(str)
+        df["juros"] = df["juros"].astype(str)
+
         df[["parcela", "soma parcela", "juros"]] = df[
             ["parcela", "soma parcela", "juros"]
         ].apply(lambda x: x.str.replace(",", ".").astype(float))
