@@ -24,7 +24,7 @@ API Flask com requisição POST para retornar um `.csv`, filtrando e consultando
 - Banco de Pagamento - `banco PGTO`
 - Taxa de juros - `juros`
 
-### Colunas das planilhas do projeto:
+### Colunas das planilhas do projeto
 
 ```csv
 cpf;nome;dt-nasc;esp;banco emp;nb;ctt;prazo;parcela;emprestado;inicio;fim;averbacao;ID_ORIGEM;cpf;cidade;uf;vl beneficio;dib;banco PGTO;meio_pgto;bairro;endereco;cep;agencia PGTO;FONE1;FONE2;FONE3;cpf;soma parcela;vl beneficio;margem;juros;idade
@@ -50,3 +50,11 @@ Exemplo:
   "banco_pgto": [104,237]
 }
 ```
+
+<details>
+  <summary>Developer Commentary</summary>
+
+  Aprendi um pouco de Flask e ainda melhorei o código de consulta de planilhas que precisavam.
+  Pandas pra sempre :)
+  
+</details>
