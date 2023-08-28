@@ -1,7 +1,8 @@
-from flask import Flask, request, jsonify, Response
-from filter import filterSpreadsheet
+from flask import Flask, Response, jsonify, request
 from flask_api import status
 from flask_cors import CORS
+
+from filter import filterSpreadsheet
 
 app = Flask(__name__)
 CORS(app)
