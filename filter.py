@@ -48,16 +48,22 @@ def filterSpreadsheet(data):
 
         def esp(df, arrayEsp):
             if arrayEsp:
+                if "ALL" in arrayEsp:
+                    return df
                 df = df[df["esp"].isin(arrayEsp)]
             return df
 
         def banco_emp(df, arrayBancos):
             if arrayBancos:
+                if "ALL" in arrayBancos:
+                    return df
                 df = df[df["banco emp"].isin(arrayBancos)]
             return df
 
         def banco_pgto(df, arrayBancos):
             if arrayBancos:
+                if "ALL" in arrayBancos:
+                    return df
                 df = df[df["banco PGTO"].isin(arrayBancos)]
             return df
 
