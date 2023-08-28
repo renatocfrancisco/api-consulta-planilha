@@ -1,6 +1,7 @@
-import os
-import pandas as pd
 import concurrent.futures
+import os
+
+import pandas as pd
 import psutil
 
 from constants.brazilian_states import brazilian_states
