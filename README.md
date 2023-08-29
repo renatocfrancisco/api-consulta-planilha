@@ -51,6 +51,8 @@ Exemplo:
 }
 ```
 
+Utilizar `["ALL"]` em "esp", "banco_emp", "banco_pgto" para filtrar todos os valores de espécie e banco.
+
 <details>
   <summary>Developer Commentary</summary>
 
