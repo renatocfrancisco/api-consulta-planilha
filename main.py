@@ -86,20 +86,23 @@ def post_data():
             status.HTTP_400_BAD_REQUEST,
         )
 
+    # check if all values in uf are strings
     if not all(isinstance(uf, str) for uf in data["uf"]):
         return (
             jsonify({"message": "UF array has invalid values", "data": data}),
             status.HTTP_400_BAD_REQUEST,
         )
 
+    special_strings_for_arrays = ["ALL"]
     for key in ("esp", "banco_emp", "banco_pgto"):
-        if not isinstance(data[key], list) or not all(
-            isinstance(uf, int) for uf in data[key]
-        ):
-            return (
-                jsonify({"message": "Data has invalid values", "data": data}),
-                status.HTTP_400_BAD_REQUEST,
-            )
+        for field in data[key]:
+            if field in special_strings_for_arrays:
+                break
+            if not isinstance(field, int):
+                return (
+                    jsonify({"message": "Data has invalid values", "data": data}),
+                    status.HTTP_400_BAD_REQUEST,
+                )
 
     result = filterSpreadsheet(data)
 
