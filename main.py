@@ -20,6 +20,7 @@ def post_data():
     if not data:
         return (jsonify({"message": "No data received"}), status.HTTP_400_BAD_REQUEST)
 
+    # insert 0 in empty integer fields
     for key in (
         "idadeMin",
         "idadeMax",
@@ -33,6 +34,7 @@ def post_data():
         if key not in data:
             data[key] = 0
 
+    # check if all fields are not null
     if not all(
         key in data
         for key in (
@@ -55,6 +57,7 @@ def post_data():
             status.HTTP_400_BAD_REQUEST,
         )
 
+    # check if list fields are lists
     if not all(
         isinstance(uf, list)
         for uf in (data["uf"], data["esp"], data["banco_emp"], data["banco_pgto"])
@@ -64,6 +67,7 @@ def post_data():
             status.HTTP_400_BAD_REQUEST,
         )
 
+    # check if all integer fields are integers
     if not all(
         isinstance(data[key], int)
         for key in (
