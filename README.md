@@ -54,7 +54,7 @@ Exemplo:
 Utilizar `["ALL"]` em "esp", "banco_emp", "banco_pgto" para filtrar todos os valores de espécie e banco.
 
 <details>
-  <summary>Developer Commentary</summary>
+  <summary>Comentários</summary>
 
   Aprendi um pouco de Flask e ainda melhorei o código de consulta de planilhas que precisavam.
   Pandas pra sempre :)
