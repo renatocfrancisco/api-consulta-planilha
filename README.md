@@ -10,7 +10,9 @@ API Flask com requisição POST para retornar um `.csv`, filtrando e consultando
 ## Requisitos e comandos
 
 - Precisa-se da pasta de planilhas (no código, pasta: `csv`), arquivos csv divididos em estados (ex: `SP.csv`)
-- `py -m venv venv`, `.\venv\Scripts\activate` e `deactivate` para usar ambiente de desenvolvimento python
+- Para usar ambiente de desenvolvimento python
+  - No Windows, instalar com `py -m venv venv`, e ativar e desativar com `.\venv\Scripts\activate` e `deactivate`
+  - No Linux, instalar com `python -m venv venv`, e ativar e desativar com `source venv/bin/activate` e `deactivate`
 - `pip install -r requirements.txt` para instalar dependências
 - `flask --app main run` para executar main.py com Flask
 
@@ -57,6 +59,9 @@ Utilizar `["ALL"]` em "esp", "banco_emp", "banco_pgto" para filtrar todos os val
   <summary>Comentários</summary>
 
   Aprendi um pouco de Flask e ainda melhorei o código de consulta de planilhas que precisavam.
-  Pandas pra sempre :)
+  
+  Pandas pra sempre `:)` Não consegui executar esse projeto em javascript e node.js. Tá aí um desafio quando, sei lá, Danfo.js melhorar ou algo melhor aparecer.
+
+  Eu não fiz, e também não pediram e se importaram em colocar restrições e segurança JWT. Talvez um dia eu olhe isso no Flask.
   
 </details>
