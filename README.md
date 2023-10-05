@@ -1,5 +1,6 @@
-# api-consulta-maciça
+# api-consulta-macica
 
+![GitHub](https://img.shields.io/github/license/renatocfrancisco/api-consulta-macica)
 ![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
 ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=flat&logo=pandas&logoColor=white)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=flat&logo=flask&logoColor=white)
