@@ -1,4 +1,4 @@
-# api-consulta-macica
+# api-consulta-planilha
 
 ![GitHub](https://img.shields.io/github/license/renatocfrancisco/api-consulta-macica)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/renatocfrancisco/api-consulta-macica)
@@ -23,7 +23,7 @@ git clone https://github.com/renatocfrancisco/api-consulta-macica
 - `pip install -r requirements.txt` para instalar dependências
 - `flask --app main run` para executar main.py com Flask
 
-## Colunas para filtrar
+### Colunas para filtrar
 
 - Idade - `idade`
 - Valor de parcela - `parcela`
@@ -64,11 +64,9 @@ Utilizar `["ALL"]` em "esp", "banco_emp", "banco_pgto" para filtrar todos os val
 
 <details>
   <summary>Comentários</summary>
-
-  Aprendi um pouco de Flask e ainda melhorei o código de consulta de planilhas que precisavam.
   
   Pandas pra sempre `:)` Não consegui executar esse projeto em javascript e node.js. Tá aí um desafio quando, sei lá, Danfo.js melhorar ou algo melhor aparecer.
 
-  Eu não fiz, e também não pediram e se importaram em colocar restrições e segurança JWT. Talvez um dia eu olhe isso no Flask.
+  Eu não coloquei restrições e segurança JWT. Talvez um dia eu olhe isso no Flask.
   
 </details>
