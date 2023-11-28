@@ -9,9 +9,9 @@
 
 API Flask com requisição POST para retornar um `.csv`, filtrando e consultando planilhas.
 
-[**Baixe o arquivo .zip**](https://github.com/renatocfrancisco/api-consulta-macica/archive/refs/heads/main.zip) ou execute:
+[**Baixe o arquivo .zip**](https://github.com/renatocfrancisco/api-consulta-planilha/archive/refs/heads/main.zip) ou execute:
 ```
-git clone https://github.com/renatocfrancisco/api-consulta-macica
+git clone https://github.com/renatocfrancisco/api-consulta-planilha
 ```
 
 ## Requisitos e comandos
